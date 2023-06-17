@@ -1,20 +1,28 @@
 import Link from "next/link";
 import styles from "./nav-list.module.scss";
-
+import Router, { useRouter } from "next/router";
 export default function NavList(props) {
+  const router = useRouter();
+
   return (
     <header className={styles.container}>
       <Link href="/">
-        <p>Home</p>
+        <p className={router.asPath === "/" && styles.active}>Home</p>
       </Link>
       <Link href="/companies">
-        <p>For Companies</p>
+        <p className={router.asPath === "/companies" && styles.active}>
+          For Companies
+        </p>
       </Link>
       <Link href="/applicants">
-        <p>For Applicants</p>
+        <p className={router.asPath === "/applicants" && styles.active}>
+          For Applicants
+        </p>
       </Link>
       <Link href="/culture-test">
-        <p>Culture Tests</p>
+        <p className={router.asPath === "/culture-test" && styles.active}>
+          Culture Tests
+        </p>
       </Link>
     </header>
   );
