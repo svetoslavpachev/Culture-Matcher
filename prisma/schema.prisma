@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Culture_Type {
+  id        Int    @id
+  name      String
+  lower_end Int?   @unique
+  upper_end Int?   @unique
+
+  @@map("Culture Type")
+}

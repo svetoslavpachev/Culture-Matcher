@@ -2,6 +2,18 @@
   display: flex;
   justify-content: space-around;
   .active {
-    color: aqua;
+    color: white;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  .active {
+    color: white;
+  }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
   }
 }
