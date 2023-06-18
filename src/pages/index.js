@@ -11,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main}`}>
-        <h1 className={styles.hello}>Hello World</h1>
+        <h1 className={styles.hello}>Culture Matcher</h1>
       </main>
     </>
   );

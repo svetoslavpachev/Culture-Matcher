@@ -8,10 +8,42 @@ datasource db {
 }
 
 model Culture_Type {
-  id        Int    @id
+  id String @id @default(uuid())
   name      String
-  lower_end Int?   @unique
-  upper_end Int?   @unique
+  lower_end Int
+  upper_end Int
+}
 
-  @@map("Culture Type")
+
+model Company {
+  id String @id @default(uuid())
+  name String
+  city String
+  culture_type String?
+}
+
+
+model Applicant {
+  id String @id @default(uuid())
+  first_name String
+  last_name String
+  culture_type String?
+}
+
+
+model Culture_Test {
+  id String @id @default(uuid())
+type String
+respondent_id String
+answer_one Int
+answer_two Int
+answer_three Int
+answer_four Int
+answer_five Int
+answer_six Int
+answer_seven Int
+answer_eight Int
+result Int
+created_at DateTime @default(now())
+completed_at DateTime @default(now())
 }
