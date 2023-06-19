@@ -32,7 +32,7 @@ model Applicant {
 
 
 model Culture_Test {
-  id String @id @default(uuid())
+id String @id @default(uuid())
 type String
 respondent_id String
 answer_one Int

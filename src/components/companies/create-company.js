@@ -2,7 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 import styles from "./create-company.module.scss";
-export default function CreateCompany({ setCreateCompany }) {
+export default function CreateCompany({
+  setCreateCompany,
+  companies,
+  setCompaies,
+}) {
   const {
     register,
     handleSubmit,
@@ -19,6 +23,7 @@ export default function CreateCompany({ setCreateCompany }) {
     })
       .then(async (res) => {
         const data = await res.json();
+        setCompaies([...companies, data]);
         console.log("Company was created", data);
         setCreateCompany(false);
       })

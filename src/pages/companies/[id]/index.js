@@ -1,7 +1,16 @@
 import { prisma } from "../../../../db/prisma-client";
+import { useState } from "react";
 
+import CultureTest from "../.././../components/culture-test/culture-test";
 export default function CompanyShow({ company }) {
-  return <h1>Welcome back {company.name}</h1>;
+  const [testCompleted, setTestCompleted] = useState(company.cultureType);
+
+  return (
+    <div>
+      <h1 className="header">Welcome back {company.name}</h1>
+      {!testCompleted && <CultureTest company={company} />}
+    </div>
+  );
 }
 
 export async function getServerSideProps(context) {
@@ -12,7 +21,6 @@ export async function getServerSideProps(context) {
       id: id,
     },
   });
-  console.log(company);
 
   try {
     return {

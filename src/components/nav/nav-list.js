@@ -15,7 +15,7 @@ export default function NavList(props) {
         <Link href="/companies">
           <p
             className={
-              router.asPath === "/companies" ? styles.active : undefined
+              router.asPath.includes("/companies") ? styles.active : undefined
             }
           >
             For Companies
@@ -24,7 +24,7 @@ export default function NavList(props) {
         <Link href="/applicants">
           <p
             className={
-              router.asPath === "/applicants" ? styles.active : undefined
+              router.asPath.includes("/applicants") ? styles.active : undefined
             }
           >
             For Applicants
@@ -33,7 +33,9 @@ export default function NavList(props) {
         <Link href="/culture-types">
           <p
             className={
-              router.asPath === "/culture-types" ? styles.active : undefined
+              router.asPath.includes("/culture-types")
+                ? styles.active
+                : undefined
             }
           >
             Culture Types

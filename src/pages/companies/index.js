@@ -16,10 +16,6 @@ const Companies = ({ companies }) => {
       <div className="header">
         <h1>Companies</h1>
       </div>
-      <SearchBar search={search} setSearch={setSearch} />
-      <div className={styles.list}>
-        <ListCompanies search={search} comp={comp} setComp={setComp} />
-      </div>
       <div className={styles.addbutton}>
         <button
           onClick={() => {
@@ -29,10 +25,19 @@ const Companies = ({ companies }) => {
           Create company
         </button>
       </div>
+      <SearchBar search={search} setSearch={setSearch} />
+      <div className={styles.list}>
+        <ListCompanies search={search} comp={comp} setComp={setComp} />
+      </div>
+
       {createCompany && (
         <div>
           <Backdrop closeModal={setCreateCompany} />
-          <CreateCompany setCreateCompany={setCreateCompany} />
+          <CreateCompany
+            setCreateCompany={setCreateCompany}
+            companies={comp}
+            setCompaies={setComp}
+          />
         </div>
       )}
     </div>
@@ -42,8 +47,9 @@ const Companies = ({ companies }) => {
 export default Companies;
 
 // getServersideProps
+// query the db for all companies
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   try {
     const companies = await prisma.company.findMany();
     return {
