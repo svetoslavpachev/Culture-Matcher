@@ -1,0 +1,12 @@
+.backdrop {
+  position: fixed;
+  z-index: 5;
+  background-color: rgba(125, 125, 125, 0.1);
+  width: 500vw;
+  height: 230vh;
+  top: -20px;
+  left: -32px;
+  right: 0px;
+  display: block;
+  backdrop-filter: blur(2px);
+}
