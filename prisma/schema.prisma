@@ -10,8 +10,8 @@ datasource db {
 model Culture_Type {
   id String @id @default(uuid())
   name      String
-  lower_end Int
-  upper_end Int
+  lower_end Float
+  upper_end Float
 }
 
 
@@ -43,7 +43,7 @@ answer_five Int
 answer_six Int
 answer_seven Int
 answer_eight Int
-result Int
+result Float
 created_at DateTime @default(now())
 completed_at DateTime @default(now())
 }

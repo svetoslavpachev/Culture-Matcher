@@ -226,16 +226,24 @@ export default function CultureTestForm({ setStartTest, company }) {
   return (
     <div className={styles.container}>
       <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
-        <div>{page + 1}</div>
+        <div>
+          <p>
+            {page + 1}/ {formQuestions.length}
+          </p>
+        </div>
+        {/*This function renders the form questions */}
         {renderQuestions(type)}
-        <button
-          disabled={page == 0}
-          onClick={() => {
-            setPage((currPage) => currPage - 1);
-          }}
-        >
-          Prev
-        </button>
+        {/*This function renders the form questions */}
+
+        {page !== 0 && (
+          <button
+            onClick={() => {
+              setPage((currPage) => currPage - 1);
+            }}
+          >
+            Prev
+          </button>
+        )}
         <button
           onClick={() => {
             if (page === formQuestions.length - 1) {

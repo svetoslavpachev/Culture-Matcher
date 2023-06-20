@@ -29,6 +29,7 @@ export default function CreateCompany({
       })
       .catch((err) => {
         console.log("err", err);
+        throw new Error(err);
       });
   };
 

@@ -31,6 +31,7 @@ const Companies = ({ companies }) => {
       </div>
 
       {createCompany && (
+        // Backdrop is a component that will close the modal when clicked outside of it
         <div>
           <Backdrop closeModal={setCreateCompany} />
           <CreateCompany

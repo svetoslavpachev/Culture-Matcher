@@ -3,11 +3,12 @@ import { useState } from "react";
 
 import CultureTest from "../.././../components/culture-test/culture-test";
 export default function CompanyShow({ company }) {
+  // check if test is completed and set state
   const [testCompleted, setTestCompleted] = useState(company.cultureType);
 
   return (
     <div>
-      <h1 className="header">Welcome back {company.name}</h1>
+      <h1 className="header">Welcome back {company?.name}</h1>
       {!testCompleted && <CultureTest company={company} />}
     </div>
   );

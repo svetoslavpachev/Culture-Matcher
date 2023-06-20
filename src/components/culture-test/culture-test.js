@@ -17,9 +17,10 @@ export default function CultureTest({ company }) {
         }}
         className={styles.btn}
       >
-        Start Now!
+        Start Now
       </button>
       {startTest && (
+        // Backdrop is a component that will close the modal when clicked outside of it
         <div>
           <Backdrop closeModal={setStartTest} />
           <CultureTestForm setStartTest={setStartTest} company={company} />
