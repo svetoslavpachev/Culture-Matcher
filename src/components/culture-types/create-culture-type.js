@@ -15,10 +15,8 @@ export default function CreateCultureType({
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("data", data);
-
-    fetch("/api/create-culture-type", {
+  const onSubmit = async (data) => {
+    await fetch("/api/create-culture-type", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -45,9 +43,7 @@ export default function CreateCultureType({
 
   return (
     <div className={styles.container}>
-      <div className="header">
-        <h1>Create culture type</h1>
-      </div>
+      <div className="header"></div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
         <input
           className={styles.input}
@@ -69,6 +65,7 @@ export default function CreateCultureType({
             type="range"
             min={1}
             max={5}
+            defaultValue={2.5}
             step={0.0001}
             {...register("average", { required: true })}
             onChange={(e) => {

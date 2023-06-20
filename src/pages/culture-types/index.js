@@ -3,6 +3,7 @@ import styles from "./culture-types.module.scss";
 import Backdrop from "@/components/backdrop/backdrop";
 import CreateCultureType from "@/components/culture-types/create-culture-type";
 import { prisma } from "../../../db/prisma-client";
+import ListCultureTypes from "@/components/culture-types/list-culture-types";
 
 // If authentication I would seprarate this route only for admins who can create culture types
 
@@ -12,7 +13,7 @@ const CultureTypes = ({ existingCultureTypes }) => {
 
   return (
     <div className={styles.container}>
-      <h1 className="header">Create your culture type</h1>
+      <h1 className="header">Create culture type based on average</h1>
       <button
         onClick={() => {
           setCreateCultureType(!createCultureType);
@@ -20,6 +21,8 @@ const CultureTypes = ({ existingCultureTypes }) => {
       >
         Create culture type
       </button>
+
+      <ListCultureTypes cultureTypes={cultureTypes} />
 
       {createCultureType && (
         // Backdrop is a component that will close the modal when clicked outside of it

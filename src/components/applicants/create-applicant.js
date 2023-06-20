@@ -1,12 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-import styles from "./create-company.module.scss";
-export default function CreateCompany({
-  setCreateCompany,
-  companies,
-  setCompaies,
-}) {
+import styles from "./create-applicant.module.scss";
+export default function CreateApplicant({ setCreateApplicant, appl, setAppl }) {
   const {
     register,
     handleSubmit,
@@ -14,7 +10,7 @@ export default function CreateCompany({
   } = useForm();
 
   const onSubmit = async (data) => {
-    await fetch("/api/create-company", {
+    await fetch("/api/create-applicant", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -23,9 +19,9 @@ export default function CreateCompany({
     })
       .then(async (res) => {
         const data = await res.json();
-        setCompaies([...companies, data]);
-        console.log("Company was created", data);
-        setCreateCompany(false);
+        setAppl([...appl, data]);
+        console.log("Applicant was created", data);
+        setCreateApplicant(false);
       })
       .catch((err) => {
         console.log("err", err);
@@ -36,25 +32,26 @@ export default function CreateCompany({
   return (
     <div className={styles.container}>
       <div className="header">
-        <h1>Create Company</h1>
+        <h1>Create Applicant</h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
         <input
           className={styles.input}
           type="text"
-          placeholder="Company name"
-          {...register("name", { required: true })}
+          placeholder="First name"
+          {...register("first_name", { required: true })}
         />
-        {errors.name && <span>This field is required</span>}
+        {errors.first_name && <span>This field is required</span>}
         <input
-          type="text"
-          placeholder="City"
           className={styles.input}
-          {...register("city", { required: true })}
+          type="text"
+          placeholder="Last name"
+          {...register("last_name", { required: true })}
         />
-        {errors.name && <span>This field is required</span>}
+        {errors.last_name && <span>This field is required</span>}
+
         <button className={styles.input} type="submit">
-          Create Company
+          Create Applicant
         </button>
       </form>
     </div>

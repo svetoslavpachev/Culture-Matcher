@@ -12,7 +12,7 @@ const Companies = ({ companies }) => {
   const [search, setSearch] = useState("");
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className="header">
         <h1>Companies</h1>
       </div>
@@ -27,7 +27,7 @@ const Companies = ({ companies }) => {
       </div>
       <SearchBar search={search} setSearch={setSearch} />
       <div className={styles.list}>
-        <ListCompanies search={search} comp={comp} setComp={setComp} />
+        <ListCompanies search={search} comp={comp} />
       </div>
 
       {createCompany && (

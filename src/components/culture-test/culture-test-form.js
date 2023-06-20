@@ -1,16 +1,12 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import styles from "./culture-test-form.module.scss";
 import { useRouter } from "next/router";
 
-export default function CultureTestForm({ setStartTest, company }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
+export default function CultureTestForm({ setStartTest, participant }) {
   const router = useRouter();
+  let average;
+
+  const [showResults, setShowResults] = useState(false);
 
   // Pagination on the form
   const formQuestions = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -18,27 +14,79 @@ export default function CultureTestForm({ setStartTest, company }) {
 
   // Get the type from the url
   const [type] = useState(
-    router.asPath.includes("/applicant") ? "applicant" : undefined
+    router.asPath.includes("/applicant") ? "applicant" : "company"
   );
 
   // Get the data from the form
   const [formData, setFormData] = useState({
-    answer_one: 1,
-    answer_two: 1,
-    answer_three: 1,
-    answer_four: 1,
-    answer_five: 1,
-    answer_six: 1,
-    answer_seven: 1,
-    answer_eight: 1,
+    answer_one: 2,
+    answer_two: 2,
+    answer_three: 2,
+    answer_four: 2,
+    answer_five: 2,
+    answer_six: 2,
+    answer_seven: 2,
+    answer_eight: 2,
   });
 
+  // Submit the form
+  const submitForm = async (data) => {
+    data.participant = participant.id;
+    data.average = average;
+    data.type = type;
+    console.log(data);
+
+    // await fetch("/api/create-culture-test", {
+    //   method: "POST",
+    //   body: JSON.stringify(data),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+  };
+
   const calculateCultureType = () => {
+    // Calculate the average
     const total = Object.values(formData).reduce((acc, curr) => {
       return acc + parseInt(curr);
     }, 0);
-    const average = total / Object.values(formData).length;
-    return <p>{average}</p>;
+    average = total / Object.values(formData).length;
+
+    // Calculate the average
+
+    return (
+      <div>
+        <p>Your average score was {average}</p>
+        <button
+          onClick={(e) => {
+            submitForm(formData);
+          }}
+        >
+          Save Results
+        </button>
+        <button
+          onClick={(e) => {
+            setShowResults(false);
+            setFormData((curr) => {
+              return {
+                ...curr,
+                answer_one: 2,
+                answer_two: 2,
+                answer_three: 2,
+                answer_four: 2,
+                answer_five: 2,
+                answer_six: 2,
+                answer_seven: 2,
+                answer_eight: 2,
+              };
+            });
+            setPage(0);
+          }}
+        >
+          Start Over
+        </button>
+      </div>
+    );
     // get all the culture types and compare the average with the culture types
     // return the culture type with the smallest difference
     // update the company with the culture type
@@ -60,13 +108,11 @@ export default function CultureTestForm({ setStartTest, company }) {
               type="range"
               min={1}
               max={5}
-              {...register("answer_one", { required: true })}
               value={formData.answer_one}
               onChange={(e) => {
                 setFormData({ ...formData, answer_one: e.target.value });
               }}
             />
-            {errors.answer_one && <span>This field is required</span>}
           </div>
         );
       case 1:
@@ -81,13 +127,11 @@ export default function CultureTestForm({ setStartTest, company }) {
               type="range"
               min={1}
               max={5}
-              {...register("answer_two", { required: true })}
               value={formData.answer_two}
               onChange={(e) => {
                 setFormData({ ...formData, answer_two: e.target.value });
               }}
             />
-            {errors.answer_two && <span>This field is required</span>}
           </div>
         );
       case 2:
@@ -102,13 +146,11 @@ export default function CultureTestForm({ setStartTest, company }) {
               type="range"
               min={1}
               max={5}
-              {...register("answer_three", { required: true })}
               value={formData.answer_three}
               onChange={(e) => {
                 setFormData({ ...formData, answer_three: e.target.value });
               }}
             />
-            {errors.answer_three && <span>This field is required</span>}
           </div>
         );
       case 3:
@@ -123,13 +165,11 @@ export default function CultureTestForm({ setStartTest, company }) {
               type="range"
               min={1}
               max={5}
-              {...register("answer_four", { required: true })}
               value={formData.answer_four}
               onChange={(e) => {
                 setFormData({ ...formData, answer_four: e.target.value });
               }}
             />
-            {errors.answer_four && <span>This field is required</span>}
           </div>
         );
       case 4:
@@ -144,13 +184,11 @@ export default function CultureTestForm({ setStartTest, company }) {
               type="range"
               min={1}
               max={5}
-              {...register("answer_five", { required: true })}
               value={formData.answer_five}
               onChange={(e) => {
                 setFormData({ ...formData, answer_five: e.target.value });
               }}
             />
-            {errors.answer_five && <span>This field is required</span>}
           </div>
         );
       case 5:
@@ -165,13 +203,11 @@ export default function CultureTestForm({ setStartTest, company }) {
               type="range"
               min={1}
               max={5}
-              {...register("answer_six", { required: true })}
               value={formData.answer_six}
               onChange={(e) => {
                 setFormData({ ...formData, answer_six: e.target.value });
               }}
             />
-            {errors.answer_six && <span>This field is required</span>}
           </div>
         );
       case 6:
@@ -186,13 +222,11 @@ export default function CultureTestForm({ setStartTest, company }) {
               type="range"
               min={1}
               max={5}
-              {...register("answer_seven", { required: true })}
               value={formData.answer_seven}
               onChange={(e) => {
                 setFormData({ ...formData, answer_seven: e.target.value });
               }}
             />
-            {errors.answer_seven && <span>This field is required</span>}
           </div>
         );
       case 7:
@@ -207,13 +241,11 @@ export default function CultureTestForm({ setStartTest, company }) {
               type="range"
               min={1}
               max={5}
-              {...register("answer_eight", { required: true })}
               value={formData.answer_eight}
               onChange={(e) => {
                 setFormData({ ...formData, answer_eight: e.target.value });
               }}
             />
-            {errors.answer_eight && <span>This field is required</span>}
           </div>
         );
 
@@ -221,44 +253,48 @@ export default function CultureTestForm({ setStartTest, company }) {
     }
   };
 
-  const onSubmit = (data) => {};
-
   return (
     <div className={styles.container}>
-      <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
+      {!showResults && (
         <div>
-          <p>
-            {page + 1}/ {formQuestions.length}
-          </p>
-        </div>
-        {/*This function renders the form questions */}
-        {renderQuestions(type)}
-        {/*This function renders the form questions */}
+          <div>
+            <p>
+              {page + 1}/ {formQuestions.length}
+            </p>
+          </div>
+          {/*This function renders the form questions */}
+          {renderQuestions(type)}
+          {/*This function renders the form questions */}
 
-        {page !== 0 && (
+          {page !== 0 && (
+            <button
+              onClick={(e) => {
+                e.preventDefault;
+                setPage((currPage) => currPage - 1);
+              }}
+            >
+              Prev
+            </button>
+          )}
+
           <button
-            onClick={() => {
-              setPage((currPage) => currPage - 1);
+            onClick={(e) => {
+              e.preventDefault();
+
+              if (page === formQuestions.length - 1) {
+                console.log(formData);
+                setShowResults(true);
+                calculateCultureType();
+              } else {
+                setPage((currPage) => currPage + 1);
+              }
             }}
           >
-            Prev
+            {page === formQuestions.length - 1 ? "Submit" : "Next"}
           </button>
-        )}
-        <button
-          onClick={() => {
-            if (page === formQuestions.length - 1) {
-              console.log(formData);
-
-              calculateCultureType();
-            } else {
-              setPage((currPage) => currPage + 1);
-            }
-          }}
-        >
-          {page === formQuestions.length - 1 ? "Submit" : "Next"}
-        </button>
-        {page === formQuestions.length - 1 && calculateCultureType()}
-      </form>
+        </div>
+      )}
+      {showResults && calculateCultureType()}
     </div>
   );
 }

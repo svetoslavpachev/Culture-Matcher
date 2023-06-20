@@ -3,7 +3,7 @@ import { useState } from "react";
 import CultureTestForm from "./culture-test-form";
 import Backdrop from "../backdrop/backdrop";
 
-export default function CultureTest({ company }) {
+export default function CultureTest({ participant }) {
   const [startTest, setStartTest] = useState(false);
   return (
     <div className={styles.container}>
@@ -23,7 +23,10 @@ export default function CultureTest({ company }) {
         // Backdrop is a component that will close the modal when clicked outside of it
         <div>
           <Backdrop closeModal={setStartTest} />
-          <CultureTestForm setStartTest={setStartTest} company={company} />
+          <CultureTestForm
+            setStartTest={setStartTest}
+            participant={participant}
+          />
         </div>
       )}
     </div>

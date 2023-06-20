@@ -2,14 +2,14 @@ import { prisma } from "../../../../db/prisma-client";
 import { useState } from "react";
 
 import CultureTest from "../.././../components/culture-test/culture-test";
-export default function CompanyShow({ company }) {
+export default function ApplicantShow({ applicant }) {
   // check if test is completed and set state
-  const [testCompleted, setTestCompleted] = useState(company.culture_type);
+  const [testCompleted, setTestCompleted] = useState(applicant.culture_type);
 
   return (
     <div>
-      <h1 className="header">Welcome back {company?.name}</h1>
-      {!testCompleted && <CultureTest participant={company} />}
+      <h1 className="header">Welcome back {applicant?.first_name}</h1>
+      {!testCompleted && <CultureTest participant={applicant} />}
     </div>
   );
 }
@@ -17,7 +17,7 @@ export default function CompanyShow({ company }) {
 export async function getServerSideProps(context) {
   const { id } = context.query;
 
-  const company = await prisma.company.findUnique({
+  const applicant = await prisma.applicant.findUnique({
     where: {
       id: id,
     },
@@ -26,13 +26,13 @@ export async function getServerSideProps(context) {
   try {
     return {
       props: {
-        company,
+        applicant,
       },
     };
   } catch (error) {
     return {
       props: {
-        company: {},
+        applicant: {},
       },
     };
   }
