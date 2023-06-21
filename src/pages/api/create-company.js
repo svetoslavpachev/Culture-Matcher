@@ -13,6 +13,7 @@ export default async function handler(req, res) {
         city: city,
       },
     });
+
     res.status(200).json(company);
   } catch (error) {
     console.log(error);

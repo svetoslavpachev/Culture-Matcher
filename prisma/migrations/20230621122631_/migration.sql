@@ -1,18 +1,9 @@
-/*
-  Warnings:
-
-  - You are about to drop the `Culture Type` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE "Culture Type";
-
 -- CreateTable
 CREATE TABLE "Culture_Type" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "lower_end" INTEGER NOT NULL,
-    "upper_end" INTEGER NOT NULL,
+    "lower_end" DOUBLE PRECISION NOT NULL,
+    "upper_end" DOUBLE PRECISION NOT NULL,
 
     CONSTRAINT "Culture_Type_pkey" PRIMARY KEY ("id")
 );
@@ -50,7 +41,7 @@ CREATE TABLE "Culture_Test" (
     "answer_six" INTEGER NOT NULL,
     "answer_seven" INTEGER NOT NULL,
     "answer_eight" INTEGER NOT NULL,
-    "result" INTEGER NOT NULL,
+    "result" DOUBLE PRECISION NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "completed_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
