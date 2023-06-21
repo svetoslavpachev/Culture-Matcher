@@ -1,39 +1,44 @@
-import { prisma } from "../../../../db/prisma-client";
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 import CultureTest from "../.././../components/culture-test/culture-test";
-export default function ApplicantShow({ applicant }) {
+import ListMatches from "@/components/matches/list-matches";
+export default function ApplicantShow() {
   // check if test is completed and set state
-  const [testCompleted, setTestCompleted] = useState(applicant.culture_type);
+  const [testCompleted, setTestCompleted] = useState(true);
+  const [applicant, setApplicant] = useState();
+  const [matches, setMatches] = useState();
+
+  const router = useRouter();
+
+  const getApplicant = async () => {
+    const res = await fetch(`/api/get-applicant-info?id=${router.query.id}`);
+
+    const data = await res.json();
+    console.log("data", data);
+    setApplicant(data.applicant);
+    setTestCompleted(data.applicant?.culture_type);
+    setMatches(data.matches);
+  };
+
+  useEffect(() => {
+    getApplicant();
+  }, []);
 
   return (
     <div>
       <h1 className="header">Welcome back {applicant?.first_name}</h1>
-      {!testCompleted && <CultureTest participant={applicant} />}
+      {applicant?.culture_type && (
+        <h3 className="header">
+          Your culture type is {applicant.culture_type}
+        </h3>
+      )}
+      {!testCompleted && (
+        <CultureTest participant={applicant} getDataFromDb={getApplicant} />
+      )}
+      {testCompleted && <ListMatches matches={matches} route={"applicant"} />}
     </div>
   );
-}
-
-export async function getServerSideProps(context) {
-  const { id } = context.query;
-
-  const applicant = await prisma.applicant.findUnique({
-    where: {
-      id: id,
-    },
-  });
-
-  try {
-    return {
-      props: {
-        applicant,
-      },
-    };
-  } catch (error) {
-    return {
-      props: {
-        applicant: {},
-      },
-    };
-  }
 }

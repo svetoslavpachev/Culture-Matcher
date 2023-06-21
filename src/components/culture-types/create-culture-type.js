@@ -66,7 +66,7 @@ export default function CreateCultureType({
             min={1}
             max={5}
             defaultValue={2.5}
-            step={0.0001}
+            step={0.001}
             {...register("average", { required: true })}
             onChange={(e) => {
               setAverage(e.target.value);

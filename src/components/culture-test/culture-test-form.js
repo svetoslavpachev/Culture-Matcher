@@ -1,12 +1,18 @@
 import { useState } from "react";
 import styles from "./culture-test-form.module.scss";
 import { useRouter } from "next/router";
+import Backdrop from "../backdrop/backdrop";
 
-export default function CultureTestForm({ setStartTest, participant }) {
+export default function CultureTestForm({
+  setStartTest,
+  participant,
+  getDataFromDb,
+}) {
   const router = useRouter();
   let average;
 
   const [showResults, setShowResults] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Pagination on the form
   const formQuestions = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -29,20 +35,31 @@ export default function CultureTestForm({ setStartTest, participant }) {
     answer_eight: 2,
   });
 
-  // Submit the form
+  // Submit the form with POST req to the API
   const submitForm = async (data) => {
+    setLoading(true);
     data.participant = participant.id;
     data.average = average;
     data.type = type;
     console.log(data);
 
-    // await fetch("/api/create-culture-test", {
-    //   method: "POST",
-    //   body: JSON.stringify(data),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
+    await fetch("/api/create-culture-test", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(async (res) => {
+        if (res.ok) {
+          await getDataFromDb();
+          setStartTest(false);
+        }
+      })
+      .catch((err) => {
+        console.log("Err return", err);
+        alert("Something went wrong", err);
+      });
   };
 
   const calculateCultureType = () => {
@@ -52,45 +69,48 @@ export default function CultureTestForm({ setStartTest, participant }) {
     }, 0);
     average = total / Object.values(formData).length;
 
-    // Calculate the average
-
     return (
       <div>
-        <p>Your average score was {average}</p>
-        <button
-          onClick={(e) => {
-            submitForm(formData);
-          }}
-        >
-          Save Results
-        </button>
-        <button
-          onClick={(e) => {
-            setShowResults(false);
-            setFormData((curr) => {
-              return {
-                ...curr,
-                answer_one: 2,
-                answer_two: 2,
-                answer_three: 2,
-                answer_four: 2,
-                answer_five: 2,
-                answer_six: 2,
-                answer_seven: 2,
-                answer_eight: 2,
-              };
-            });
-            setPage(0);
-          }}
-        >
-          Start Over
-        </button>
+        {loading ? (
+          <p>Calculating your culture type....</p>
+        ) : (
+          <div>
+            {" "}
+            <p>Your average score was {average.toFixed(2)}</p>
+            {/* Submits the form and save the test */}
+            <button
+              onClick={(e) => {
+                submitForm(formData);
+              }}
+            >
+              Save Results
+            </button>
+            {/* Re-do the test */}
+            <button
+              onClick={(e) => {
+                setShowResults(false);
+                setFormData((curr) => {
+                  return {
+                    ...curr,
+                    answer_one: 2,
+                    answer_two: 2,
+                    answer_three: 2,
+                    answer_four: 2,
+                    answer_five: 2,
+                    answer_six: 2,
+                    answer_seven: 2,
+                    answer_eight: 2,
+                  };
+                });
+                setPage(0);
+              }}
+            >
+              Start Over
+            </button>
+          </div>
+        )}
       </div>
     );
-    // get all the culture types and compare the average with the culture types
-    // return the culture type with the smallest difference
-    // update the company with the culture type
-    // update the applicant with the culture type
   };
 
   // Render the questions based on the type

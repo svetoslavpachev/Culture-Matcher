@@ -3,7 +3,7 @@ import { useState } from "react";
 import CultureTestForm from "./culture-test-form";
 import Backdrop from "../backdrop/backdrop";
 
-export default function CultureTest({ participant }) {
+export default function CultureTest({ participant, getDataFromDb }) {
   const [startTest, setStartTest] = useState(false);
   return (
     <div className={styles.container}>
@@ -24,6 +24,7 @@ export default function CultureTest({ participant }) {
         <div>
           <Backdrop closeModal={setStartTest} />
           <CultureTestForm
+            getDataFromDb={getDataFromDb}
             setStartTest={setStartTest}
             participant={participant}
           />

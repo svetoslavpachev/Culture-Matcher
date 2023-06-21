@@ -1,4 +1,5 @@
 import { prisma } from "../../../db/prisma-client";
+import getLowerAndUpperEnd from "../../../lib/average-score";
 
 // Function to validate culture type
 function validateCultureType(cultureType, existingCultureTypes) {
@@ -32,24 +33,14 @@ export default async function handler(req, res) {
     // Function to get lower and upper end
     // precision of 2 decimal places for lower and upper end
     // e.g. 0.01, 0.02, 0.03, 0.04, 0.05
-    const getLowerAndUpperEnd = (average) => {
-      const multipliedNumber = average * 100;
-      const floorNumber = Math.floor(multipliedNumber) / 100;
-      const ceilNum = Math.ceil(multipliedNumber) / 100;
-
-      return {
-        lower_end: floorNumber,
-        upper_end: ceilNum,
-      };
-    };
 
     const { lower_end, upper_end } = getLowerAndUpperEnd(average);
 
     const existingCultureTypes = await prisma.culture_Type.findMany();
     const cultureType = {
       name,
-      lower_end,
-      upper_end,
+      lower_end: parseFloat(lower_end.toFixed(2)),
+      upper_end: parseFloat(upper_end.toFixed(2)),
     };
 
     // Check if culture type is valid
@@ -65,8 +56,8 @@ export default async function handler(req, res) {
       const cultureTypeReturned = await prisma.culture_Type.create({
         data: {
           name,
-          lower_end,
-          upper_end,
+          lower_end: parseFloat(lower_end.toFixed(2)),
+          upper_end: parseFloat(upper_end.toFixed(2)),
         },
       });
       res.status(200).json(cultureTypeReturned);
@@ -76,8 +67,8 @@ export default async function handler(req, res) {
       const cultureTypeReturned = await prisma.culture_Type.create({
         data: {
           name,
-          lower_end,
-          upper_end,
+          lower_end: parseFloat(lower_end.toFixed(2)),
+          upper_end: parseFloat(upper_end.toFixed(2)),
         },
       });
       res.status(200).json(cultureTypeReturned);

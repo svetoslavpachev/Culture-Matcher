@@ -48,7 +48,6 @@ export default CultureTypes;
 export async function getServerSideProps(context) {
   try {
     const existingCultureTypes = await prisma.culture_Type.findMany();
-    console.log("existingCultureTypes", existingCultureTypes);
     return {
       props: {
         existingCultureTypes,
