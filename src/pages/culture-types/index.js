@@ -1,7 +1,10 @@
 import { useState } from "react";
 import styles from "./culture-types.module.scss";
+
 import Backdrop from "@/components/backdrop/backdrop";
 import CreateCultureType from "@/components/culture-types/create-culture-type";
+
+// Prisma client is a library that will allow us to connect to the database
 import { prisma } from "../../../db/prisma-client";
 import ListCultureTypes from "@/components/culture-types/list-culture-types";
 
@@ -26,14 +29,14 @@ const CultureTypes = ({ existingCultureTypes }) => {
 
       {createCultureType && (
         // Backdrop is a component that will close the modal when clicked outside of it
-        <div>
+        <>
           <Backdrop closeModal={setCreateCultureType} />
           <CreateCultureType
             setCreateCultureType={setCreateCultureType}
             setCultureTypes={setCultureTypes}
             cultureTypes={cultureTypes}
           />
-        </div>
+        </>
       )}
     </div>
   );

@@ -1,4 +1,5 @@
 import { prisma } from "../../../db/prisma-client";
+
 import getLowerAndUpperEnd from "../../../lib/average-score";
 
 // Function to validate culture type
@@ -30,10 +31,9 @@ export default async function handler(req, res) {
   try {
     const { name, average } = req.body;
 
-    // Function to get lower and upper end
+    // getLowerAndUpperEnd() Function to get lower and upper end
     // precision of 2 decimal places for lower and upper end
     // e.g. 0.01, 0.02, 0.03, 0.04, 0.05
-
     const { lower_end, upper_end } = getLowerAndUpperEnd(average);
 
     const existingCultureTypes = await prisma.culture_Type.findMany();
@@ -45,11 +45,9 @@ export default async function handler(req, res) {
 
     // Check if culture type is valid
     if (validateCultureType(cultureType, existingCultureTypes) === false) {
-      res
-        .status(400)
-        .json({
-          message: "Invalid culture type, it overlaps with another Type",
-        });
+      res.status(400).json({
+        message: "Invalid culture type, it overlaps with another Type",
+      });
       return;
     } else if (
       // Check if there are existing culture types

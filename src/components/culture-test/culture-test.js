@@ -1,10 +1,13 @@
 import styles from "./culter-test.module.scss";
+
 import { useState } from "react";
+
 import CultureTestForm from "./culture-test-form";
 import Backdrop from "../backdrop/backdrop";
 
 export default function CultureTest({ participant, getDataFromDb }) {
   const [startTest, setStartTest] = useState(false);
+
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>
@@ -21,14 +24,14 @@ export default function CultureTest({ participant, getDataFromDb }) {
       </button>
       {startTest && (
         // Backdrop is a component that will close the modal when clicked outside of it
-        <div>
+        <>
           <Backdrop closeModal={setStartTest} />
           <CultureTestForm
             getDataFromDb={getDataFromDb}
             setStartTest={setStartTest}
             participant={participant}
           />
-        </div>
+        </>
       )}
     </div>
   );

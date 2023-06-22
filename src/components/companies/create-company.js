@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 import styles from "./create-company.module.scss";
+
 export default function CreateCompany({
   setCreateCompany,
   companies,

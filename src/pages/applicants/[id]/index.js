@@ -3,11 +3,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
+import styles from "./index.module.scss";
+
 import CultureTest from "../.././../components/culture-test/culture-test";
 import ListMatches from "@/components/matches/list-matches";
-import styles from "./index.module.scss";
+
 export default function ApplicantShow() {
-  // check if test is completed and set state
   const [testCompleted, setTestCompleted] = useState(true);
   const [applicant, setApplicant] = useState();
   const [matches, setMatches] = useState();

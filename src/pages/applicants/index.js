@@ -1,8 +1,9 @@
-// import createApplicant from "@/components/companies/create-company";
-import { useState } from "react";
-import styles from "./index.module.scss";
-import Backdrop from "@/components/backdrop/backdrop";
 import { prisma } from "../../../db/prisma-client";
+
+import styles from "./index.module.scss";
+import { useState } from "react";
+
+import Backdrop from "@/components/backdrop/backdrop";
 import SearchBar from "../../components/searchbar/searchbar";
 import ListApplicants from "../../components/applicants/list-applicants";
 import CreateApplicant from "@/components/applicants/create-applicant";
@@ -33,14 +34,14 @@ const Applicant = ({ applicants }) => {
 
       {createApplicant && (
         // Backdrop is a component that will close the modal when clicked outside of it
-        <div>
+        <>
           <Backdrop closeModal={setCreateApplicant} />
           <CreateApplicant
             setCreateApplicant={setCreateApplicant}
             appl={appl}
             setAppl={setAppl}
           />
-        </div>
+        </>
       )}
     </div>
   );

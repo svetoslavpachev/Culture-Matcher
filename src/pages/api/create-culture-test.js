@@ -1,8 +1,7 @@
 import { prisma } from "../../../db/prisma-client";
+
 import generateName from "../../../lib/random-name";
 import getLowerAndUpperEnd from "../../../lib/average-score";
-
-// Function to validate culture type
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -23,7 +22,7 @@ export default async function handler(req, res) {
       type,
     } = req.body;
 
-    // Function to get lower and upper end
+    // getLowerAndUpperEnd() Function to get lower and upper end
     // precision of 2 decimal places for lower and upper end
     // e.g. 0.01, 0.02, 0.03, 0.04, 0.05
     const { lower_end, upper_end } = getLowerAndUpperEnd(average);
@@ -43,12 +42,10 @@ export default async function handler(req, res) {
         type,
       },
     });
-    console.log("Test created", test);
     let cultureType;
     let respondent;
 
     // query the DB to find the culture type based on the average score
-
     cultureType = await prisma.culture_Type.findFirst({
       where: {
         AND: [

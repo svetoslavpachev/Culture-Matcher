@@ -1,5 +1,6 @@
-import { useState } from "react";
 import styles from "./culture-test-form.module.scss";
+
+import { useState } from "react";
 import { useRouter } from "next/router";
 
 export default function CultureTestForm({
@@ -8,21 +9,21 @@ export default function CultureTestForm({
   getDataFromDb,
 }) {
   const router = useRouter();
-  let average;
 
   const [showResults, setShowResults] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  let average;
   // Pagination on the form
   const formQuestions = [1, 2, 3, 4, 5, 6, 7, 8];
   const [page, setPage] = useState(0);
 
-  // Get the type from the url
+  // Gets the type from the url
   const [type] = useState(
     router.asPath.includes("/applicant") ? "applicant" : "company"
   );
 
-  // Get the data from the form
+  // Gets the data from the form
   const [formData, setFormData] = useState({
     answer_one: 2,
     answer_two: 2,
@@ -60,6 +61,24 @@ export default function CultureTestForm({
       });
   };
 
+  const resetTest = () => {
+    setShowResults(false);
+    setFormData((curr) => {
+      return {
+        ...curr,
+        answer_one: 2,
+        answer_two: 2,
+        answer_three: 2,
+        answer_four: 2,
+        answer_five: 2,
+        answer_six: 2,
+        answer_seven: 2,
+        answer_eight: 2,
+      };
+    });
+    setPage(0);
+  };
+
   const calculateCultureType = () => {
     // Calculate the average
     const total = Object.values(formData).reduce((acc, curr) => {
@@ -72,9 +91,11 @@ export default function CultureTestForm({
         {loading ? (
           <p>Calculating your culture type....</p>
         ) : (
-          <div>
+          <>
             {" "}
-            <p>Your average score was {average.toFixed(2)}</p>
+            <p className={styles.averageScore}>
+              Your average score was {average.toFixed(2)}
+            </p>
             {/* Submits the form and save the test */}
             <button
               onClick={(e) => {
@@ -85,33 +106,19 @@ export default function CultureTestForm({
             </button>
             {/* Re-do the test */}
             <button
-              onClick={(e) => {
-                setShowResults(false);
-                setFormData((curr) => {
-                  return {
-                    ...curr,
-                    answer_one: 2,
-                    answer_two: 2,
-                    answer_three: 2,
-                    answer_four: 2,
-                    answer_five: 2,
-                    answer_six: 2,
-                    answer_seven: 2,
-                    answer_eight: 2,
-                  };
-                });
-                setPage(0);
+              onClick={() => {
+                resetTest();
               }}
             >
               Start Over
             </button>
-          </div>
+          </>
         )}
       </div>
     );
   };
 
-  // Render the questions based on the type
+  // Render the questions based on the type company/applicant
   const renderQuestions = (type) => {
     switch (page) {
       case 0:
@@ -290,14 +297,13 @@ export default function CultureTestForm({
   return (
     <div className={styles.container}>
       {!showResults && (
-        <div>
+        <>
           <p>
             {page + 1}/ {formQuestions.length}
           </p>
 
-          {/*This function renders the form questions */}
+          {/*This function renders the questions from the form */}
           {renderQuestions(type)}
-          {/*This function renders the form questions */}
 
           <div className={styles.btnContainer}>
             {page !== 0 && (
@@ -314,7 +320,6 @@ export default function CultureTestForm({
             <button
               onClick={(e) => {
                 e.preventDefault();
-
                 if (page === formQuestions.length - 1) {
                   setShowResults(true);
                   calculateCultureType();
@@ -326,7 +331,7 @@ export default function CultureTestForm({
               {page === formQuestions.length - 1 ? "Submit" : "Next"}
             </button>
           </div>
-        </div>
+        </>
       )}
       {showResults && calculateCultureType()}
     </div>

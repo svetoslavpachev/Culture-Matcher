@@ -1,9 +1,11 @@
-import CreateCompany from "@/components/companies/create-company";
+import { prisma } from "../../../db/prisma-client";
+
 import { useState } from "react";
 import styles from "./index.module.scss";
+
 import Backdrop from "@/components/backdrop/backdrop";
-import { prisma } from "../../../db/prisma-client";
 import SearchBar from "../../components/searchbar/searchbar";
+import CreateCompany from "@/components/companies/create-company";
 import ListCompanies from "../../components/companies/list-companies";
 
 const Companies = ({ companies }) => {
@@ -32,14 +34,14 @@ const Companies = ({ companies }) => {
 
       {createCompany && (
         // Backdrop is a component that will close the modal when clicked outside of it
-        <div>
+        <>
           <Backdrop closeModal={setCreateCompany} />
           <CreateCompany
             setCreateCompany={setCreateCompany}
             companies={comp}
             setCompaies={setComp}
           />
-        </div>
+        </>
       )}
     </div>
   );
