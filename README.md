@@ -4,48 +4,66 @@ This is a full-stack application which matches Applicants with Companies based o
 
 ## Built With
 
-This app was build with Nextjs, PostgreSQL, SCSS, Prisma
+This app was build with NextJS, ReactJS, NodeJS, PostgreSQL, SCSS, Prisma
 
-## Getting Started
+## Getting Started for developers
 
 1. Clone the repo
-   - https://github.com/svetoslavpachev/culture-matcher.git
+   - git clone https://github.com/svetoslavpachev/culture-matcher.git
 2. Install NPM packages
    - npm install
-3. Run the development server
+3. Create .env file in the root directory of the app and put the DATABASE_URL shared with you.
+
+4. Run the development server
    - npm run dev
-
-# or
-
-- yarn dev
-- Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* or
+   - yarn dev
+   - Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## More Details
+ The front-end has been created with React reusable components. They can be found in the components folder in src/components. The _app.js file in src/pages/_app.js is the main wrapper around the whole front-end.
+ 
+ The back-end has been done with NodeJS using the src/pages/api directory to create API end-points for serverless functions. HTTP request are done with fetch from the front-end. In src/pages/companies/index.js and src/pages/applicants/index.js the data fetching is done by performing getServerSideProps function, so server side rendering is performed and the data is sent to the component via props.
 
-It should be possible to create culture types
 
-It should be possible to list culture types
+## Usage
 
-It should be possible to create companies
+As a user I can create culture types
 
-It should be possible to create applicants
+As a user I can see all culture types
 
-It should be possible to visualise the list of companies
+As a user I can create companies
 
-It should be possible to visualise the list of applicants
+As a user I can create applicants
 
-It should be possible to answer an applicant culture test
+As a user I can see the list of companies
 
-It should be possible to answer a company culture test
+As a user I can see the list of applicants
 
-It should compute the culture test result when the test is completed
+As an applicant I can submit culture test
 
-It should update the company culture type once the culture test is completed and the result is calculated
+As a company I can submit culture test
 
-It should update the applicant culture type once the culture test is complete and the result is calculated
+It computes the culture test result when the test is completed
 
-As an applicant, it should be possible to visualise my matches
+It updates the company culture type once the culture test is completed and the result is calculated
 
-As a company, it should be possible to visualise my matches
+It updates the applicant culture type once the culture test is complete and the result is calculated
+
+As an applicant, I can visualise my matches
+
+As a company, I can visualise my matches
+
+
+## Contact
+ https://www.github.com/svetoslavpachev
+
+ https://www.linkedin.com/in/svetoslav-pachev-886a73a8/
+
+
+
+
+
+
+
