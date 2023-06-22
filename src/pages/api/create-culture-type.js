@@ -45,7 +45,11 @@ export default async function handler(req, res) {
 
     // Check if culture type is valid
     if (validateCultureType(cultureType, existingCultureTypes) === false) {
-      res.status(400).json({ message: "Invalid culture type" });
+      res
+        .status(400)
+        .json({
+          message: "Invalid culture type, it overlaps with another Type",
+        });
       return;
     } else if (
       // Check if there are existing culture types

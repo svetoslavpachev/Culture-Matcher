@@ -13,6 +13,7 @@ export default function CreateCultureType({
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -26,12 +27,13 @@ export default function CreateCultureType({
       .then(async (res) => {
         if (res.status === 200) {
           const data = await res.json();
-          console.log("data", data);
           setCultureTypes([...cultureTypes, data]);
           console.log("Culture type created", data);
           setCreateCultureType(false);
         } else if (res.status === 400) {
-          alert("Invalid culture type");
+          const data = await res.json();
+          alert(`${data.message}`);
+          reset();
           console.log("Invalid culture type");
         }
       })
