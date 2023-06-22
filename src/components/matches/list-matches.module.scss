@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  .pTagMatch {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #173438;
+    margin: 20px;
+  }
+}
+
+.listMatches {
+  display: flex;
+  flex-wrap: wrap;
+  width: 200px;
+  height: 100px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  margin: 20px;
+
+  &:hover {
+    transition: all 0.5s ease-in-out;
+    background-color: #a29a9a;
+  }
+  overflow: scroll;
+}
+
+.match {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: #173438;
+}

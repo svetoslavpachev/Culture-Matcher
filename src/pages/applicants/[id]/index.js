@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 
 import CultureTest from "../.././../components/culture-test/culture-test";
 import ListMatches from "@/components/matches/list-matches";
+import styles from "./index.module.scss";
 export default function ApplicantShow() {
   // check if test is completed and set state
   const [testCompleted, setTestCompleted] = useState(true);
@@ -17,7 +18,6 @@ export default function ApplicantShow() {
     const res = await fetch(`/api/get-applicant-info?id=${router.query.id}`);
 
     const data = await res.json();
-    console.log("data", data);
     setApplicant(data.applicant);
     setTestCompleted(data.applicant?.culture_type);
     setMatches(data.matches);
@@ -31,7 +31,7 @@ export default function ApplicantShow() {
     <div>
       <h1 className="header">Welcome back {applicant?.first_name}</h1>
       {applicant?.culture_type && (
-        <h3 className="header">
+        <h3 className={`header ${styles.cultureType}`}>
           Your culture type is {applicant.culture_type}
         </h3>
       )}

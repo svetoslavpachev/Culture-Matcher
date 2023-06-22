@@ -35,7 +35,7 @@ export default function CreateCompany({
 
   return (
     <div className={styles.container}>
-      <div className="header">
+      <div className={`header ${styles.createHeaderOne}`}>
         <h1>Create Company</h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
@@ -53,7 +53,7 @@ export default function CreateCompany({
           {...register("city", { required: true })}
         />
         {errors.name && <span>This field is required</span>}
-        <button className={styles.input} type="submit">
+        <button className={`${styles.btnSubmit}`} type="submit">
           Create Company
         </button>
       </form>

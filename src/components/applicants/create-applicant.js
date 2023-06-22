@@ -31,7 +31,7 @@ export default function CreateApplicant({ setCreateApplicant, appl, setAppl }) {
 
   return (
     <div className={styles.container}>
-      <div className="header">
+      <div className={`header ${styles.createHeader}`}>
         <h1>Create Applicant</h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
@@ -50,7 +50,7 @@ export default function CreateApplicant({ setCreateApplicant, appl, setAppl }) {
         />
         {errors.last_name && <span>This field is required</span>}
 
-        <button className={styles.input} type="submit">
+        <button className={`${styles.btnSubmit}`} type="submit">
           Create Applicant
         </button>
       </form>

@@ -15,7 +15,7 @@ export default function ListCompanies({ comp, search }) {
           .map((cm) => {
             return (
               <ul key={cm.id}>
-                <li>
+                <li className="list-item">
                   <Link href={`companies/${cm.id}`}>{cm.name}</Link>
                 </li>
               </ul>

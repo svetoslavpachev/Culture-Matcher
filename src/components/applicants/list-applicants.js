@@ -19,7 +19,7 @@ export default function ListApplicants({ appl, search }) {
           .map((applicant) => {
             return (
               <ul key={applicant.id}>
-                <li>
+                <li className="list-item">
                   <Link href={`applicants/${applicant.id}`}>
                     {applicant?.first_name + " " + applicant?.last_name}
                   </Link>

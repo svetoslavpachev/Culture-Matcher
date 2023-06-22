@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       },
     });
 
-    if (applicant.culture_type) {
+    if (applicant?.culture_type) {
       matches = await prisma.company.findMany({
         where: {
           culture_type: applicant.culture_type,

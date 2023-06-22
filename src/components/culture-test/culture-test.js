@@ -7,7 +7,7 @@ export default function CultureTest({ participant, getDataFromDb }) {
   const [startTest, setStartTest] = useState(false);
   return (
     <div className={styles.container}>
-      <h3 className={`header ${styles.title}`}>
+      <h3 className={styles.title}>
         Complete your culture test in less than 5 minutes and get the right
         matches for you.
       </h3>

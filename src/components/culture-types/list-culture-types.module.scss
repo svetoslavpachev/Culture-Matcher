@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.listMatches {
+  display: flex;
+  overflow: scroll;
+  flex-wrap: wrap;
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.1s ease-in-out;
+  margin: 20px;
+  &:hover {
+    transition: all 0.5s ease-in-out;
+    background-color: #a29a9a;
+    color: white;
+  }
+  .match {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .name {
+      color: #173438;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 10px;
+      text-transform: capitalize;
+    }
+    .range {
+      font-size: 1rem;
+      font-weight: bold;
+      margin: 10px;
+      text-transform: capitalize;
+    }
+  }
+}

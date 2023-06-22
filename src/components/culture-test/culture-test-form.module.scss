@@ -1,16 +1,43 @@
 .container {
   width: 50%;
   height: 50%;
-  z-index: 99;
+  z-index: 10;
   position: fixed;
   top: 150px;
   left: 350px;
   background-color: whitesmoke;
 }
 
-.formContainer {
+.container {
+  display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  padding: 20px;
+
+  .questionContainer {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: baseline;
+    width: 100%;
+    .wrapperQuestion {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      .question {
+        margin: 10px;
+      }
+    }
+    .wrapper {
+      width: 100%;
+    }
+  }
+  .btnContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
 }

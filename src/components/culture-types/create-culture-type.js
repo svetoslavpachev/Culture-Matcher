@@ -7,7 +7,7 @@ export default function CreateCultureType({
   cultureTypes,
   setCultureTypes,
 }) {
-  const [average, setAverage] = useState();
+  const [average, setAverage] = useState(2.5);
 
   const {
     register,
@@ -43,7 +43,9 @@ export default function CreateCultureType({
 
   return (
     <div className={styles.container}>
-      <div className="header"></div>
+      <div className={`header ${styles.createHeader}`}>
+        <h1>Create Type</h1>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
         <input
           className={styles.input}
@@ -54,10 +56,12 @@ export default function CreateCultureType({
         {errors.name && <span>This field is required</span>}
         <div>
           <div>
-            <label htmlFor="average">
-              Average score for this culture type{" "}
-              {average && parseFloat(average).toFixed(2)}
-            </label>
+            {average && (
+              <label htmlFor="average">
+                Average score for this culture type is{" "}
+                {parseFloat(average).toFixed(2)}
+              </label>
+            )}
           </div>
           <span>1</span>
           <input
@@ -72,12 +76,11 @@ export default function CreateCultureType({
               setAverage(e.target.value);
             }}
           />
-
           <span>5</span>
         </div>
 
-        <button className={styles.input} type="submit">
-          Create type
+        <button className={`${styles.btnSubmit}`} type="submit">
+          Create Type
         </button>
       </form>
     </div>
