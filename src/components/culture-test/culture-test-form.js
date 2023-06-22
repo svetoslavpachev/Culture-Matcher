@@ -316,7 +316,6 @@ export default function CultureTestForm({
                 e.preventDefault();
 
                 if (page === formQuestions.length - 1) {
-                  console.log(formData);
                   setShowResults(true);
                   calculateCultureType();
                 } else {
