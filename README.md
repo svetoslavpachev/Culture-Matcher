@@ -55,6 +55,14 @@ As an applicant, I can visualise my matches
 
 As a company, I can visualise my matches
 
+## Things I am proud of
+Designed and styled by myself without using any libraries
+
+## Future improvements
+1. Add authentication / separate routes for admins/applicants/companies
+2. Make the data base relational using partition keys
+3. Re-model the data structure
+
 
 ## Contact
  https://www.github.com/svetoslavpachev
