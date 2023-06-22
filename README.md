@@ -4,7 +4,7 @@ This is a full-stack application which matches Applicants with Companies based o
 
 ## Built With
 
-This app was build with Nextjs, PostrgesQL, SCSS, Prisma
+This app was build with Nextjs, PostgreSQL, SCSS, Prisma
 
 ## Getting Started
 
