@@ -43,6 +43,7 @@ export default async function handler(req, res) {
         type,
       },
     });
+    console.log("Test created", test);
     let cultureType;
     let respondent;
 

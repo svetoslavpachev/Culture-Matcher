@@ -40,7 +40,6 @@ export default function CultureTestForm({
     data.participant = participant.id;
     data.average = average;
     data.type = type;
-    console.log(data);
 
     await fetch("/api/create-culture-test", {
       method: "POST",
