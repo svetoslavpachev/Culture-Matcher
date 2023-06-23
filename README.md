@@ -34,7 +34,7 @@ The back-end has been done with NodeJS using the src/pages/api directory to crea
 
 The data model for the app is located in prisma/schema.prisma. The app is connected to a cloud data base (PostgreSQL) and I am using Prisma to comunicate with the data base for simplicity and performance.
 
-When updating the schema you need to go and update the models in the schema.prisma file. Once the models are updated you need to run [ npx prisma migrate ] to create a migration file with you changes.  
+When updating the schema you need to go and update the models in the schema.prisma file. Once the models are updated you need to run [ npx prisma migrate ] to create a migration file with you changes and a timestamp.  
 
 For more info follow the [`Pirsma documentation`](https://www.prisma.io/docs/concepts/components/prisma-migrate).
 
