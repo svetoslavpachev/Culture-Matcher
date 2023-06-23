@@ -8,6 +8,8 @@ This app was build with NextJS, ReactJS, NodeJS, PostgreSQL, SCSS, Prisma
 
 ## Getting Started for developers
 
+NOTE : You should have npm installed
+
 1. Clone the repo
    - git clone https://github.com/svetoslavpachev/culture-matcher.git
 2. Install NPM packages
